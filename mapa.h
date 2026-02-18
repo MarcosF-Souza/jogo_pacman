@@ -21,7 +21,9 @@ void liberaMapa(TMapa *m);
 void alocaMapa(TMapa *m);
 int validaMapa(TMapa *m, int x, int y);  //vê se a posição passou das fronteiras do mapa
 int validaPosicao(TMapa *m, int x, int y);  //vê se a posição é vazia
-int podeAndar(TMapa *m, int x, int y);  //junta as funções 'validaMapa' e 'validaPosicao'
+int validaParede(TMapa *m, int x, int y);
+int validaPersonagem(TMapa *m, char personagem, int x, int y);
+int podeAndar(TMapa *m, char personagem, int x, int y);  //junta as funções 'validaMapa' e 'validaPosicao'
 void andaNoMapa(TMapa *m, int xOrigem, int yOrigem, int xDestino, int yDestino);
 void copiaMapa(TMapa *origem, TMapa *destino);
 

@@ -9,14 +9,11 @@ void copiaMapa(TMapa *origem, TMapa *destino) {
   destino->colunas = origem->colunas;
 
   alocaMapa(destino);
-  for(int i=0; i<origem->linhas; i++) {
-
+  for(int i=0; i<origem->linhas; i++) 
     strcpy(destino->matriz[i], origem->matriz[i]);
-  }
 }
 
 void andaNoMapa(TMapa *m, int xOrigem, int yOrigem, int xDestino, int yDestino) {
-
   char personagem = m->matriz[xOrigem][yOrigem];
   m->matriz[xDestino][yDestino] = personagem;
   m->matriz[xOrigem][yOrigem] = '.'; 
@@ -34,8 +31,19 @@ int validaPosicao(TMapa *m, int x, int y) {
   return m->matriz[x][y] == VAZIO;
 }
 
-int podeAndar(TMapa *m, int x, int y) {
-  return validaMapa(m, x, y) && validaPosicao(m, x, y);
+int validaParede(TMapa *m, int x, int y) {
+  return m->matriz[x][y] == PAREDE_HORIZONTAL || m->matriz[x][y] == PAREDE_VERTICAL;
+}
+
+int validaPersonagem(TMapa *m, char personagem, int x, int y) {
+  return m->matriz[x][y] == personagem;
+}
+
+int podeAndar(TMapa *m, char personagem, int x, int y) {
+  return 
+    validaMapa(m, x, y) && 
+    !validaParede(m, x, y) &&
+    !validaPersonagem(m, personagem, x, y);
 }
 
 int encontraMapa(TMapa *m, TPosicao *p, char c) {
@@ -44,8 +52,8 @@ int encontraMapa(TMapa *m, TPosicao *p, char c) {
   for(int i=0; i < m->linhas; i++) {
     for(int j=0; j < m->colunas; j++) {
 
-      if(m->matriz[i][j] == c) {  //guardando a posição do PacMan
-
+      if(m->matriz[i][j] == c)  //guardando a posição do PacMan 
+      {  
         p->x = i;
         p->y = j;
         return 1;
@@ -96,3 +104,4 @@ void imprimeMapa(TMapa *m) {
   for(int i=0; i < m->linhas; i++)
     printf("%s\n", m->matriz[i]);
 }
+

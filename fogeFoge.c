@@ -58,7 +58,7 @@ void move(char direcao) {
       break;
   }
 
-  if(!podeAndar(&m, proximoX, proximoY))
+  if(!podeAndar(&m, HEROI, proximoX, proximoY))
     return;
   
   andaNoMapa(&m, heroi.x, heroi.y, proximoX, proximoY);
@@ -79,10 +79,8 @@ void fantasmas() {
         int xDestino, yDestino;
         int encontrou = praOndeFantasmaVai(i, j, &xDestino, &yDestino);
 
-        if(encontrou) {
-
+        if(encontrou) 
           andaNoMapa(&m, i, j, xDestino, yDestino);
-        }
       }
     }
   }
@@ -103,7 +101,7 @@ int praOndeFantasmaVai(int xOrigem, int yOrigem, int *xDestino, int *yDestino) {
   for(int i=0; i<10; i++) {
 
     int posicao = rand()%4;
-    if(podeAndar(&m, opcoes[posicao][0], opcoes[posicao][1])) {
+    if(podeAndar(&m, FANTASMA, opcoes[posicao][0], opcoes[posicao][1])) {
 
       *xDestino = opcoes[posicao][0];
       *yDestino = opcoes[posicao][1];
