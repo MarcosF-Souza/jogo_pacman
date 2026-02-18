@@ -8,7 +8,6 @@
 TMapa m;
 TPosicao heroi;
 
-
 int main(void) {
 
   leMapa(&m);
