@@ -30,7 +30,6 @@ int main(void) {
 
 //*************** FUNÇÕES ***************
 int validarDirecao(char direcao) {
-
   return (direcao==ESQUERDA || direcao==CIMA || direcao==BAIXO || direcao==DIREITA); 
 }
 
@@ -117,5 +116,9 @@ int praOndeFantasmaVai(int xOrigem, int yOrigem, int *xDestino, int *yDestino) {
 }
 
 int acabou() {
-  return 0;
+
+  TPosicao pos;
+  int pacMan = encontraMapa(&m, &pos, HEROI);
+
+  return !pacMan;
 }

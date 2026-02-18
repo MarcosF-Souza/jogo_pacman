@@ -38,7 +38,7 @@ int podeAndar(TMapa *m, int x, int y) {
   return validaMapa(m, x, y) && validaPosicao(m, x, y);
 }
 
-void encontraMapa(TMapa *m, TPosicao *p, char c) {
+int encontraMapa(TMapa *m, TPosicao *p, char c) {
 
   //sempre tenho que percorrer a matriz inteira pra encontrar o herói, como melhorar isso?
   for(int i=0; i < m->linhas; i++) {
@@ -48,10 +48,12 @@ void encontraMapa(TMapa *m, TPosicao *p, char c) {
 
         p->x = i;
         p->y = j;
-        break;
+        return 1;
       }
     }
   }
+
+  return 0;
 }
 
 void liberaMapa(TMapa *m) {
@@ -75,8 +77,8 @@ void leMapa(TMapa *m) {
   FILE *f; //variável para manipular arquivos
   f = fopen("C:\\Users\\marco\\OneDrive\\Desktop\\Marcos\\alura\\C\\pacMan\\mapa.txt", "r");
   
-  if(!f) {  //verifica se o arquivo foi aberto corretamente
-
+  if(!f) //verifica se o arquivo foi aberto corretamente 
+  {  
     printf("\n\nErro na leitura do mapa");
     exit(1);
   }
@@ -90,8 +92,7 @@ void leMapa(TMapa *m) {
   fclose(f);
 }
 
-void imprimeMapa(TMapa *m) {
-  
+void imprimeMapa(TMapa *m) { 
   for(int i=0; i < m->linhas; i++)
     printf("%s\n", m->matriz[i]);
 }

@@ -25,4 +25,4 @@ int podeAndar(TMapa *m, int x, int y);  //junta as funções 'validaMapa' e 'val
 void andaNoMapa(TMapa *m, int xOrigem, int yOrigem, int xDestino, int yDestino);
 void copiaMapa(TMapa *origem, TMapa *destino);
 
-void encontraMapa(TMapa *m, TPosicao *p, char c);
+int encontraMapa(TMapa *m, TPosicao *p, char c);  //retorna inteiro para saber se achou ou não o personagem
