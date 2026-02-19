@@ -13,8 +13,8 @@ int main(void) {
   leMapa(&m);
   encontraMapa(&m, &heroi, HEROI);  //encontra a posição do herói
 
-  do {
-
+  do
+  {
     imprimeMapa(&m);
 
     char comando;
@@ -42,8 +42,8 @@ void move(char direcao) {
   if(!validarDirecao(direcao)) 
     return;
 
-  switch (direcao) {
-
+  switch (direcao) 
+  {
     case ESQUERDA:
       proximoY--;
       break;
@@ -71,11 +71,13 @@ void fantasmas() {
   TMapa copia;
   copiaMapa(&m, &copia);
 
-  for(int i=0; i<m.linhas; i++) {
-    for(int j=0; j<m.colunas; j++) {
+  for(int i=0; i<m.linhas; i++) 
+  {
+    for(int j=0; j<m.colunas; j++) 
+    {
 
-      if(copia.matriz[i][j] == FANTASMA) {
-      
+      if(copia.matriz[i][j] == FANTASMA) 
+      {
         int xDestino, yDestino;
         int encontrou = praOndeFantasmaVai(i, j, &xDestino, &yDestino);
 
@@ -90,7 +92,8 @@ void fantasmas() {
 
 int praOndeFantasmaVai(int xOrigem, int yOrigem, int *xDestino, int *yDestino) {
 
-  int opcoes[4][2] = {
+  int opcoes[4][2] = 
+  {
     {xOrigem, yOrigem+1},
     {xOrigem+1, yOrigem},
     {xOrigem, yOrigem-1},
@@ -101,8 +104,8 @@ int praOndeFantasmaVai(int xOrigem, int yOrigem, int *xDestino, int *yDestino) {
   for(int i=0; i<10; i++) {
 
     int posicao = rand()%4;
-    if(podeAndar(&m, FANTASMA, opcoes[posicao][0], opcoes[posicao][1])) {
-
+    if(podeAndar(&m, FANTASMA, opcoes[posicao][0], opcoes[posicao][1])) 
+    {
       *xDestino = opcoes[posicao][0];
       *yDestino = opcoes[posicao][1];
 
