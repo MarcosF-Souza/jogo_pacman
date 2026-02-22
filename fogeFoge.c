@@ -101,8 +101,8 @@ int praOndeFantasmaVai(int xOrigem, int yOrigem, int *xDestino, int *yDestino) {
   };
 
   srand(time(0));
-  for(int i=0; i<10; i++) {
-
+  for(int i=0; i<10; i++) 
+  {
     int posicao = rand()%4;
     if(podeAndar(&m, FANTASMA, opcoes[posicao][0], opcoes[posicao][1])) 
     {

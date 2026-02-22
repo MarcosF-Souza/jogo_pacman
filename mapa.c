@@ -49,9 +49,10 @@ int podeAndar(TMapa *m, char personagem, int x, int y) {
 int encontraMapa(TMapa *m, TPosicao *p, char c) {
 
   //sempre tenho que percorrer a matriz inteira pra encontrar o herói, como melhorar isso?
-  for(int i=0; i < m->linhas; i++) {
-    for(int j=0; j < m->colunas; j++) {
-
+  for(int i=0; i < m->linhas; i++) 
+  {
+    for(int j=0; j < m->colunas; j++) 
+    {
       if(m->matriz[i][j] == c)  //guardando a posição do PacMan 
       {  
         p->x = i;
@@ -104,4 +105,3 @@ void imprimeMapa(TMapa *m) {
   for(int i=0; i < m->linhas; i++)
     printf("%s\n", m->matriz[i]);
 }
-
