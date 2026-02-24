@@ -3,23 +3,23 @@
 #include <stdlib.h>
 #include "mapa.h"
 
-void copiaMapa(TMapa *origem, TMapa *destino) {
+void copiarMapa(TMapa *origem, TMapa *destino) {
 
   destino->linhas = origem->linhas;
   destino->colunas = origem->colunas;
 
-  alocaMapa(destino);
+  alocarMapa(destino);
   for(int i=0; i<origem->linhas; i++) 
     strcpy(destino->matriz[i], origem->matriz[i]);
 }
 
-void andaNoMapa(TMapa *m, int xOrigem, int yOrigem, int xDestino, int yDestino) {
+void andarNoMapa(TMapa *m, int xOrigem, int yOrigem, int xDestino, int yDestino) {
   char personagem = m->matriz[xOrigem][yOrigem];
   m->matriz[xDestino][yDestino] = personagem;
   m->matriz[xOrigem][yOrigem] = '.'; 
 }
 
-int validaMapa(TMapa *m, int x, int y) {
+int validarMapa(TMapa *m, int x, int y) {
 
   if(x>=m->linhas || y>=m->colunas)
     return 0;
@@ -27,26 +27,26 @@ int validaMapa(TMapa *m, int x, int y) {
   return 1;
 }
 
-int validaPosicao(TMapa *m, int x, int y) {
+int validarPosicao(TMapa *m, int x, int y) {
   return m->matriz[x][y] == VAZIO;
 }
 
-int validaParede(TMapa *m, int x, int y) {
+int validarParede(TMapa *m, int x, int y) {
   return m->matriz[x][y] == PAREDE_HORIZONTAL || m->matriz[x][y] == PAREDE_VERTICAL;
 }
 
-int validaPersonagem(TMapa *m, char personagem, int x, int y) {
+int validarPersonagem(TMapa *m, char personagem, int x, int y) {
   return m->matriz[x][y] == personagem;
 }
 
 int podeAndar(TMapa *m, char personagem, int x, int y) {
   return 
-    validaMapa(m, x, y) && 
-    !validaParede(m, x, y) &&
-    !validaPersonagem(m, personagem, x, y);
+    validarMapa(m, x, y) && 
+    !validarParede(m, x, y) &&
+    !validarPersonagem(m, personagem, x, y);
 }
 
-int encontraMapa(TMapa *m, TPosicao *p, char c) {
+int encontrarMapa(TMapa *m, TPosicao *p, char c) {
 
   //sempre tenho que percorrer a matriz inteira pra encontrar o herói, como melhorar isso?
   for(int i=0; i < m->linhas; i++) 
@@ -65,7 +65,7 @@ int encontraMapa(TMapa *m, TPosicao *p, char c) {
   return 0;
 }
 
-void liberaMapa(TMapa *m) {
+void liberarMapa(TMapa *m) {
 
   for(int i=0; i < m->linhas; i++)
     free(m->matriz[i]);
@@ -73,7 +73,7 @@ void liberaMapa(TMapa *m) {
   free(m->matriz);
 }
 
-void alocaMapa(TMapa *m) {
+void alocarMapa(TMapa *m) {
 
   m->matriz = malloc(sizeof(char*) * m->linhas);  //malloc: memory allocation
 
@@ -81,7 +81,7 @@ void alocaMapa(TMapa *m) {
     m->matriz[i] = malloc(sizeof(char) * m->colunas + 1);  // Aloca colunas (+1 para '\0')
 }
 
-void leMapa(TMapa *m) {
+void lerMapa(TMapa *m) {
 
   FILE *f; //variável para manipular arquivos
   f = fopen("C:\\Users\\marco\\OneDrive\\Desktop\\Marcos\\alura\\C\\pacMan\\mapa.txt", "r");
@@ -93,7 +93,7 @@ void leMapa(TMapa *m) {
   }
 
   fscanf(f, "%d %d", &(m->linhas), &(m->colunas));
-  alocaMapa(m);
+  alocarMapa(m);
 
   for(int i=0; i < m->linhas; i++) 
     fscanf(f, "%s", m->matriz[i]);
@@ -101,7 +101,7 @@ void leMapa(TMapa *m) {
   fclose(f);
 }
 
-void imprimeMapa(TMapa *m) { 
+void imprimirMapa(TMapa *m) { 
   for(int i=0; i < m->linhas; i++)
     printf("%s\n", m->matriz[i]);
 }

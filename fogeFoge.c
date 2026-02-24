@@ -11,30 +11,41 @@ int temPipula = 0;
 
 int main(void) {
 
-  leMapa(&m);
-  encontraMapa(&m, &heroi, HEROI);  //encontra a posição do herói
+  lerMapa(&m);
+  encontrarMapa(&m, &heroi, HEROI);  //encontra a posição do herói
 
   do
   {
     printf("Tem pilula: %s\n", (temPipula ? "SIM" : "NAO"));
-    imprimeMapa(&m);
+    imprimirMapa(&m);
 
     char comando;
     scanf(" %c", &comando);
-    
     move(comando);
-    if(comando == BOMBA) explodePilula();
+
+    if(comando == BOMBA) 
+      explodePilula();
 
     fantasmas();
 
   } while(!acabou());
 
-  liberaMapa(&m);
+  liberarMapa(&m);
 }
 
 //*************** FUNÇÕES ***************
 void explodePilula() {
-  printf("EXPLODIU");
+  for (int i=1; i<=3; i++) 
+  {
+    if (validarMapa(&m, heroi.x, heroi.y+i))
+    {
+      if(validarParede(&m, heroi.x, heroi.y+1))
+      {
+        break;
+      }
+      m.matriz[heroi.x][heroi.y+i] = VAZIO;
+    }
+  }
 }
 
 int validarDirecao(char direcao) {
@@ -69,12 +80,12 @@ void move(char direcao) {
   if(!podeAndar(&m, HEROI, proximoX, proximoY))
     return;
 
-  if (validaPersonagem(&m, PILULA, proximoX, proximoY))
+  if (validarPersonagem(&m, PILULA, proximoX, proximoY))
   {
     temPipula = 1; //verdadeiro
   }
   
-  andaNoMapa(&m, heroi.x, heroi.y, proximoX, proximoY);
+  andarNoMapa(&m, heroi.x, heroi.y, proximoX, proximoY);
   heroi.x = proximoX;
   heroi.y = proximoY;
 }
@@ -82,7 +93,7 @@ void move(char direcao) {
 void fantasmas() {
 
   TMapa copia;
-  copiaMapa(&m, &copia);
+  copiarMapa(&m, &copia);
 
   for(int i=0; i<m.linhas; i++) 
   {
@@ -95,12 +106,12 @@ void fantasmas() {
         int encontrou = praOndeFantasmaVai(i, j, &xDestino, &yDestino);
 
         if(encontrou) 
-          andaNoMapa(&m, i, j, xDestino, yDestino);
+          andarNoMapa(&m, i, j, xDestino, yDestino);
       }
     }
   }
 
-  liberaMapa(&copia);
+  liberarMapa(&copia);
 }
 
 int praOndeFantasmaVai(int xOrigem, int yOrigem, int *xDestino, int *yDestino) {
@@ -132,7 +143,7 @@ int praOndeFantasmaVai(int xOrigem, int yOrigem, int *xDestino, int *yDestino) {
 int acabou() {
 
   TPosicao pos;
-  int pacMan = encontraMapa(&m, &pos, HEROI);
+  int pacMan = encontrarMapa(&m, &pos, HEROI);
 
   return !pacMan;
 }
