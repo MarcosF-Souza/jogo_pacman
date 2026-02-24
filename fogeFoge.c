@@ -7,6 +7,7 @@
 //definição de variáveis globais
 TMapa m;
 TPosicao heroi;
+int temPipula = 0;
 
 int main(void) {
 
@@ -15,12 +16,15 @@ int main(void) {
 
   do
   {
+    printf("Tem pilula: %s\n", (temPipula ? "SIM" : "NAO"));
     imprimeMapa(&m);
 
     char comando;
     scanf(" %c", &comando);
     
     move(comando);
+    if(comando == BOMBA) explodePilula();
+
     fantasmas();
 
   } while(!acabou());
@@ -29,6 +33,10 @@ int main(void) {
 }
 
 //*************** FUNÇÕES ***************
+void explodePilula() {
+  printf("EXPLODIU");
+}
+
 int validarDirecao(char direcao) {
   return (direcao==ESQUERDA || direcao==CIMA || direcao==BAIXO || direcao==DIREITA); 
 }
@@ -60,6 +68,11 @@ void move(char direcao) {
 
   if(!podeAndar(&m, HEROI, proximoX, proximoY))
     return;
+
+  if (validaPersonagem(&m, PILULA, proximoX, proximoY))
+  {
+    temPipula = 1; //verdadeiro
+  }
   
   andaNoMapa(&m, heroi.x, heroi.y, proximoX, proximoY);
   heroi.x = proximoX;
