@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "time.h"
-#include "fogeFoge.h"
+#include "pacMan.h"
 #include "mapa.c"
 #include "ui.c"
 
