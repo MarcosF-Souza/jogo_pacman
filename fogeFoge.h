@@ -1,13 +1,18 @@
+#ifndef _FOGEFOGE_H_
+#define _FOGEFOGE_H_
+
 #define ESQUERDA 'a'
 #define CIMA 'w'
 #define BAIXO 's'
 #define DIREITA 'd'
 #define BOMBA 'b'
 
-void move(char direcao);
 int acabou();
+void move(char direcao);
+
 int validarDirecao(char direcao);
 void fantasmas();
-int praOndeFantasmaVai(int xOrigem, int yOrigem, int *xDestino, int *yDestino);
-void explodePilula2(int x, int y, int somaX, int somaY, int qtd);
 void explodePilula();
+void explodePilula2(int x, int y, int somaX, int somaY, int qtd);
+
+#endif

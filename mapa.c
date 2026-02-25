@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 #include "mapa.h"
 
 void copiarMapa(TMapa *origem, TMapa *destino) {
@@ -99,9 +99,4 @@ void lerMapa(TMapa *m) {
     fscanf(f, "%s", m->matriz[i]);
 
   fclose(f);
-}
-
-void imprimirMapa(TMapa *m) { 
-  for(int i=0; i < m->linhas; i++)
-    printf("%s\n", m->matriz[i]);
 }

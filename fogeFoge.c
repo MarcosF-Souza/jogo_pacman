@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include "time.h"
 #include "fogeFoge.h"
 #include "mapa.c"
+#include "ui.c"
 
 //definição de variáveis globais
 TMapa m;
@@ -102,30 +103,6 @@ void move(char direcao) {
   heroi.y = proximoY;
 }
 
-void fantasmas() {
-
-  TMapa copia;
-  copiarMapa(&m, &copia);
-
-  for(int i=0; i<m.linhas; i++) 
-  {
-    for(int j=0; j<m.colunas; j++) 
-    {
-
-      if(copia.matriz[i][j] == FANTASMA) 
-      {
-        int xDestino, yDestino;
-        int encontrou = praOndeFantasmaVai(i, j, &xDestino, &yDestino);
-
-        if(encontrou) 
-          andarNoMapa(&m, i, j, xDestino, yDestino);
-      }
-    }
-  }
-
-  liberarMapa(&copia);
-}
-
 int praOndeFantasmaVai(int xOrigem, int yOrigem, int *xDestino, int *yDestino) {
 
   int opcoes[4][2] = 
@@ -151,6 +128,31 @@ int praOndeFantasmaVai(int xOrigem, int yOrigem, int *xDestino, int *yDestino) {
 
   return 0;
 }
+
+void fantasmas() {
+
+  TMapa copia;
+  copiarMapa(&m, &copia);
+
+  for(int i=0; i<m.linhas; i++) 
+  {
+    for(int j=0; j<m.colunas; j++) 
+    {
+
+      if(copia.matriz[i][j] == FANTASMA) 
+      {
+        int xDestino, yDestino;
+        int encontrou = praOndeFantasmaVai(i, j, &xDestino, &yDestino);
+
+        if(encontrou) 
+          andarNoMapa(&m, i, j, xDestino, yDestino);
+      }
+    }
+  }
+
+  liberarMapa(&copia);
+}
+
 
 int acabou() {
 
