@@ -9,4 +9,5 @@ int acabou();
 int validarDirecao(char direcao);
 void fantasmas();
 int praOndeFantasmaVai(int xOrigem, int yOrigem, int *xDestino, int *yDestino);
+void explodePilula2(int x, int y, int somaX, int somaY, int qtd);
 void explodePilula();

@@ -35,17 +35,29 @@ int main(void) {
 
 //*************** FUNÇÕES ***************
 void explodePilula() {
-  for (int i=1; i<=3; i++) 
-  {
-    if (validarMapa(&m, heroi.x, heroi.y+i))
-    {
-      if(validarParede(&m, heroi.x, heroi.y+1))
-      {
-        break;
-      }
-      m.matriz[heroi.x][heroi.y+i] = VAZIO;
-    }
-  }
+
+  if(!temPipula) return;
+
+  explodePilula2(heroi.x, heroi.y, 0, 1, 3);
+  explodePilula2(heroi.x, heroi.y, 0, -1, 3);
+  explodePilula2(heroi.x, heroi.y, 1, 0, 3);
+  explodePilula2(heroi.x, heroi.y, -1, 0, 3);
+
+  temPipula = 0;
+}
+
+void explodePilula2(int x, int y, int somaX, int somaY, int qtd) {
+
+  if(qtd==0) return;
+
+  int novoX = x + somaX;
+  int novoY = y + somaY;
+
+  if(!validarMapa(&m, novoX, novoY)) return;
+  if(validarParede(&m, novoX, novoY)) return; 
+
+  m.matriz[novoX][novoY] = VAZIO;
+  explodePilula2(novoX, novoY, somaX, somaY, qtd-1);
 }
 
 int validarDirecao(char direcao) {
