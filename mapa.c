@@ -84,7 +84,7 @@ void alocarMapa(TMapa *m) {
 void lerMapa(TMapa *m) {
 
   FILE *f; //variável para manipular arquivos
-  f = fopen("C:\\Users\\marco\\OneDrive\\Desktop\\Marcos\\alura\\C\\pacMan\\mapa.txt", "r");
+  f = fopen("/home/marcos/Desktop/Marcos/alura/C/pacMan/mapa.txt", "r");
   
   if(!f) //verifica se o arquivo foi aberto corretamente 
   {  
